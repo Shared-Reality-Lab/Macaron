@@ -19,7 +19,6 @@ var saveLoadStore = Reflux.createStore({
 
 	onSave() {
 
-
 		// Here you can specify how you'd like the files to be named
 		var jsonFileName = "my_waveform.json";
 		var wavFileName = "my_waveform.wav";
@@ -55,11 +54,13 @@ var saveLoadStore = Reflux.createStore({
 		/**
 		 *  Creating the JSON file for download
 		 */
+
+		// !!! Antoine check here for saving .json files
 		var dataJSON = JSON.stringify(VTIconStore.store.getInitialState()["main"], null, 2);
 		var fullDataJSON = "data:text/json;charset=utf8, " + dataJSON;
 		var dataBlob = new Blob([fullDataJSON], {type: "text/JSON"});
 		dataBlob.name = jsonFileName;
-		var dataURL = URL.createObjectURL(dataBlob);
+		var dataURL = URL.createObjectURL(dataBlob); // !!! this is the url to download the json file, this should be what is passed to the server
 
 		var jsonDownloadLink = document.createElement("a");
 		jsonDownloadLink.id = "json-download-link";
