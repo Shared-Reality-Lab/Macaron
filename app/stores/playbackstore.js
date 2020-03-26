@@ -107,16 +107,23 @@ var playbackStore = Reflux.createStore({
 	* 
 	*/
 
-	onPlay() { this.onSetPlaying(true); },
+	onPlay() { this.onSetPlaying(true);
+			// !!! for reasons I do not understand, functions called here do not execute
+			},
 
 	onPause() { this.onSetPlaying(false); },
 
 	onTogglePlaying () { this.onSetPlaying(!this._data.playing); },
 
 	onSetPlaying(newplaying) {
+		// !!! playback functionality here
 		this._data['playing'] = newplaying;
 		this.trigger(this._data);
 
+		// !!! random stuff for you
+		alert("Hello Antoine...You pressed the playhead!!!");
+		console.log("delicious data (note data here pertains to signal playback functionality): ",this._data);
+		// ================= 
 		LogStore.actions.log("PLAYBACK_SETPLAY_"+newplaying);
 
 		if(this._data['playing']) {
